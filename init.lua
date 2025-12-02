@@ -10,11 +10,22 @@ local function getEnvValue(key)
 end
 
 local secretValue = getEnvValue("SECRET_VALUE") or "hello"
+local cellPhone = getEnvValue("CELL_PHONE") or "01000000000"
 
 -- Control + Option + Cmd + P를 눌러 SECRET_VALUE 타이핑
 hs.hotkey.bind({"ctrl", "alt", "cmd"}, "P", function()
     hs.eventtap.keyStrokes(secretValue)
 end)
+
+-- Control + Option + Cmd + H를 눌러 전화번호 입력
+hs.hotkey.bind({"ctrl", "alt", "cmd"}, "H", function()
+    hs.eventtap.keyStrokes(cellPhone)
+end)
+
+hs.hotkey.bind({"cmd", "alt"}, "V", function()
+    hs.eventtap.keyStrokes(hs.pasteboard.getContents())
+end)
+
 
 -- Hammerspoon 설정 리로드 알림
 hs.alert.show("Config loaded")
