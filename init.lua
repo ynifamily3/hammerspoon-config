@@ -26,6 +26,25 @@ hs.hotkey.bind({"cmd", "alt"}, "V", function()
     hs.eventtap.keyStrokes(hs.pasteboard.getContents())
 end)
 
+-- 오른쪽 Command 키 상태 추적
+rightCmdPressed = false
+rightCmdFlagsTap = hs.eventtap.new({hs.eventtap.event.types.flagsChanged}, function(event)
+    if event:getKeyCode() == 54 then
+        rightCmdPressed = event:getFlags().cmd
+    end
+    return false
+end)
+rightCmdFlagsTap:start()
+
+-- 오른쪽 Command + Space 차단
+rightCmdSpaceTap = hs.eventtap.new({hs.eventtap.event.types.keyDown}, function(event)
+    if event:getKeyCode() == 49 and rightCmdPressed then
+        return true
+    end
+    return false
+end)
+rightCmdSpaceTap:start()
+
 
 -- Hammerspoon 설정 리로드 알림
 hs.alert.show("Config loaded")
