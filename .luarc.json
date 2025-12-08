@@ -1,0 +1,6 @@
+{
+  "workspace.library": [
+    "/Applications/Hammerspoon.app/Contents/Resources/extensions/hs/"
+  ],
+  "diagnostics.globals": ["hs", "spoon"]
+}
